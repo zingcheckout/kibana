@@ -5761,6 +5761,7 @@ a.thumbnail:hover {
   padding: 5px 10px;
   width: 100%;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 .bgNav {
   background: #080808;
@@ -5796,6 +5797,7 @@ pre {
 .panel {
   display: inline-table;
   vertical-align: top;
+  margin-left: -1px;
 }
 .panel-container {
   padding: 0px 0px 0px 0px;
@@ -5838,7 +5840,7 @@ pre {
   z-index: 9999;
 }
 .dragInProgress .panel-container {
-  border: 3px solid rgba(100, 100, 100, 0.5);
+  border: 1px solid #007fff;
 }
 .row-add-button {
   margin: 5px;
@@ -5930,6 +5932,7 @@ form input.ng-invalid {
   font-weight: bold;
   font-size: 0.9em;
   margin: 0px 10px;
+  text-align: left;
 }
 .row-close {
   padding: 0px;
@@ -6060,6 +6063,17 @@ div.flot-text {
   background-color: #ff7518;
   border-color: transparent;
   color: #ff934b;
+}
+.dropdown-menu,
+.tooltip-inner,
+.nav-pills > li > a {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.nav-pills > li.open > a {
+  border-color: transparent !important;
+  border-color: rgba(51, 181, 229, 0.4) !important;
 }
 /* ===================================================
  * popover-extra-placements.css v0.1
