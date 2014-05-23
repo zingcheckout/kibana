@@ -1,8 +1,10 @@
 /** @scratch /panels/5
+ *
  * include::panels/terms.asciidoc[]
  */
 
 /** @scratch /panels/terms/0
+ *
  * == terms
  * Status: *Stable*
  *
@@ -94,7 +96,7 @@ function (angular, app, _, $, kbn) {
        */
       chart       : 'bar',
       /** @scratch /panels/terms/5
-       * counter_pos:: The location of the legend in respect to the chart, above or below.
+       * counter_pos:: The location of the legend in respect to the chart, above, below, or none.
        */
       counter_pos : 'above',
       /** @scratch /panels/terms/5
@@ -102,6 +104,7 @@ function (angular, app, _, $, kbn) {
        */
       spyable     : true,
       /** @scratch /panels/terms/5
+       *
        * ==== Queries
        * queries object:: This object describes the queries to use on this panel.
        * queries.mode::: Of the queries available, which to use. Options: +all, pinned, unpinned, selected+
@@ -174,7 +177,7 @@ function (angular, app, _, $, kbn) {
           .facetFilter($scope.ejs.QueryFilter(
             $scope.ejs.FilteredQuery(
               boolQuery,
-              filterSrv.getBoolFilter(filterSrv.ids)
+              filterSrv.getBoolFilter(filterSrv.ids())
             )))).size(0);
       }
       if($scope.panel.tmode === 'terms_stats') {
@@ -187,7 +190,7 @@ function (angular, app, _, $, kbn) {
           .facetFilter($scope.ejs.QueryFilter(
             $scope.ejs.FilteredQuery(
               boolQuery,
-              filterSrv.getBoolFilter(filterSrv.ids)
+              filterSrv.getBoolFilter(filterSrv.ids())
             )))).size(0);
       }
 
@@ -252,14 +255,10 @@ function (angular, app, _, $, kbn) {
     return {
       restrict: 'A',
       link: function(scope, elem) {
+        var plot;
 
         // Receive render events
         scope.$on('render',function(){
-          render_panel();
-        });
-
-        // Re-render if the window is resized
-        angular.element(window).bind('resize', function(){
           render_panel();
         });
 
@@ -289,7 +288,7 @@ function (angular, app, _, $, kbn) {
 
         // Function for rendering panel
         function render_panel() {
-          var plot, chartData;
+          var chartData;
 
           build_results();
 
@@ -320,8 +319,8 @@ function (angular, app, _, $, kbn) {
                   xaxis: { show: false },
                   grid: {
                     borderWidth: 0,
-                    borderColor: '#eee',
-                    color: "#eee",
+                    borderColor: '#c8c8c8',
+                    color: "#c8c8c8",
                     hoverable: true,
                     clickable: true
                   },
@@ -359,7 +358,7 @@ function (angular, app, _, $, kbn) {
                     }
                   },
                   //grid: { hoverable: true, clickable: true },
-                  grid:   { hoverable: true, clickable: true },
+                  grid:   { hoverable: true, clickable: true, color: '#c8c8c8' },
                   colors: querySrv.colors
                 });
               }

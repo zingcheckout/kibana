@@ -1,8 +1,10 @@
 /** @scratch /panels/5
+ *
  * include::panels/sparklines.asciidoc[]
  */
 
 /** @scratch /panels/sparklines/0
+ *
  * == Sparklines
  * Status: *Experimental*
  *
@@ -54,6 +56,7 @@ function (angular, app, $, _, kbn, moment, timeSeries) {
     // Set and populate defaults
     var _d = {
       /** @scratch /panels/sparklines/3
+       *
        * === Parameters
        * mode:: Value to use for the y-axis. For all modes other than count, +value_field+ must be
        * defined. Possible values: count, mean, max, min, total.
@@ -77,6 +80,7 @@ function (angular, app, $, _, kbn, moment, timeSeries) {
        */
       spyable       : true,
       /** @scratch /panels/sparklines/5
+       *
        * ==== Queries
        * queries object:: This object describes the queries to use on this panel.
        * queries.mode::: Of the queries available, which to use. Options: +all, pinned, unpinned, selected+
@@ -169,7 +173,7 @@ function (angular, app, $, _, kbn, moment, timeSeries) {
       _.each(queries, function(q) {
         var query = $scope.ejs.FilteredQuery(
           querySrv.toEjsObj(q),
-          filterSrv.getBoolFilter(filterSrv.ids)
+          filterSrv.getBoolFilter(filterSrv.ids())
         );
 
         var facet = $scope.ejs.DateHistogramFacet(q.id);
@@ -289,11 +293,6 @@ function (angular, app, $, _, kbn, moment, timeSeries) {
 
         // Receive render events
         scope.$watch('series',function(){
-          render_panel();
-        });
-
-        // Re-render if the window is resized
-        angular.element(window).bind('resize', function(){
           render_panel();
         });
 
